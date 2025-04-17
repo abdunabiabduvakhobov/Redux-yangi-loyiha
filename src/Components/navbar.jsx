@@ -10,7 +10,6 @@ const Navbar = () => {
       <img src={logo} width={150}  alt="" />
       </div>
      </Link>
-
       <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto">
        <Link to={'/login'} className='me-3 py-2 link-body-emphasis text-decoration-none' >
        Login
@@ -18,8 +17,6 @@ const Navbar = () => {
        <Link to={'/register'} className='me-3 py-2 link-body-emphasis text-decoration-none' >
        Register
        </Link>
-        
-       
       </nav>
     </div>
   )
