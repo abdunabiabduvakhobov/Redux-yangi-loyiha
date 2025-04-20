@@ -3,8 +3,10 @@ import React, { useState } from 'react'
 import { icon } from '../constants'
 import { Input } from '../ui'
 import { useDispatch, useSelector } from 'react-redux'
-import {signUserStart, signUserSuccess, singnUserFailure } from '../slice/auth'
+import {signUserStart, signUserSuccess, signUserFailure } from '../slice/auth'
 import AuthService from '../service/auth'
+import {ValidationError} from './'
+
 
 
 const Login = () => {
@@ -22,7 +24,9 @@ const Login = () => {
       const response = await AuthService.userLogin(user)
       dispatch(signUserSuccess(response.user))
     } catch (error) {
-      dispatch(singnUserFailure(error.response.data.errors))
+      dispatch(signUserFailure(error.response.data.errors))
+     
+      
     }
 
 
@@ -33,6 +37,7 @@ const Login = () => {
         <form>
           <img className="mb-2 ml-18 " src={icon} alt="" width="170" height="67" />
           <h1 className="h3 mb-3 fw-normal">Please login</h1>
+          <ValidationError/>
           <Input label={'Email address'} state={email} setState={setEmail} />
           <Input label={'Password'} type={'password'} state={password} setState={setPassword} />
           <button onClick={loginHandler} disabled={isLoading} className="btn btn-primary w-100 py-2 mt-2" type="submit">{isLoading ? 'loading...' : 'Login'}</button>
