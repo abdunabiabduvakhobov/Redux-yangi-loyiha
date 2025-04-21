@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { Routes, Route } from 'react-router'
-import { Header, Login, Navbar, Register } from './Components'
+import { ArticleDetail, Header, Login, Navbar, Register } from './Components'
 import AuthService from './service/auth'
 import { useDispatch } from 'react-redux'
 import { signUserSuccess } from './slice/auth'
@@ -30,7 +30,7 @@ function App() {
      const response = await ArticleService.getArticle()
      dispatch(getArticlesSucces(response.articles))
     } catch (error) {
-      console.log('error');
+       console.log('error');
       
 
     }
@@ -45,11 +45,14 @@ function App() {
   return (
     <>
       <Navbar />
+      <div className='container'>
       <Routes>
         <Route path='/' element={<Header />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
+        <Route path='/article/:slug' element={<ArticleDetail/>}/>
       </Routes>
+      </div>
     </>
   )
 }

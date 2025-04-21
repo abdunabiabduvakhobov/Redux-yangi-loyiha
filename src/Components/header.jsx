@@ -1,14 +1,15 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { Loader } from '../ui'
+import { useNavigate } from 'react-router'
 
 const Header = () => {
   const { articles, isLoading } = useSelector(state => state.article)
+  const navigate = useNavigate()
 
   return (
-    <div className="container">
+    <>
       {isLoading && <Loader/> }
-      
       <div className='row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3'>
         {articles.map(item => (
           <div className='col' key={item.id}>
@@ -18,7 +19,7 @@ const Header = () => {
                 <p className="card-text font-semibold">{item.title}</p>
                 <div className="d-flex justify-content-between align-items-center">
                   <div className="">
-                    <button type="button" className="btn btn-sm btn-outline-secondary">View</button>
+                    <button type="button" onClick={()=> navigate(`/article/${item.slug}`)} className="btn btn-sm btn-outline-secondary">View</button>
                     <button type="button" className="btn btn-sm btn-outline-secondary">Edit</button>
                     <button type="button" className="btn btn-sm btn-outline-secondary ">Delete</button>
                   </div>
@@ -29,7 +30,7 @@ const Header = () => {
           </div>
         ))}
       </div>
-    </div>
+    </>
   )
 }
 
