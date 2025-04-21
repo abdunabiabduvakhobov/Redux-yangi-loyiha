@@ -13,7 +13,8 @@ const AuthService = {
 
     },
     async getUser() {
-        // const response = await axios.get('http://localhost:3000/api/user')
+        const {data} = await axios.get('/user')
+        return data
     },
   
 }
