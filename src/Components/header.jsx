@@ -1,11 +1,14 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import { Loader } from '../ui'
 
 const Header = () => {
-  const { articles } = useSelector(state => state.article)
+  const { articles, isLoading } = useSelector(state => state.article)
 
   return (
     <div className="container">
+      {isLoading && <Loader/> }
+      
       <div className='row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3'>
         {articles.map(item => (
           <div className='col' key={item.id}>
