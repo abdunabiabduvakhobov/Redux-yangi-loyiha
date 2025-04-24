@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect,  } from 'react'
 import viteLogo from '/vite.svg'
-import './App.css'
+
 import { Routes, Route } from 'react-router'
 import { ArticleDetail, Header, Login, Navbar, Register } from './Components'
 import AuthService from './service/auth'
@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux'
 import { signUserSuccess } from './slice/auth'
 import { getItem } from './helpers/persistance-storage'
 import ArticleService from './service/article'
-import { getArticlesStart, getArticlesSucces } from './slice/article'
+import { getArticlesStart, getArticlesSuccess } from './slice/article'
 
 
 function App() {
@@ -28,7 +28,7 @@ function App() {
     dispatch(getArticlesStart())
     try {
      const response = await ArticleService.getArticle()
-     dispatch(getArticlesSucces(response.articles))
+     dispatch(getArticlesSuccess(response.articles))
     } catch (error) {
        console.log('error');
       
