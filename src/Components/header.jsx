@@ -7,27 +7,39 @@ import ArticleService from '../service/article'
 
 const Header = () => {
   const { articles, isLoading } = useSelector(state => state.article)
+  const { loggedIn, user } = useSelector(state => state.auth)
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
   const getArticles = async () => {
     dispatch(getArticlesStart())
     try {
-     const response = await ArticleService.getArticle()
-     dispatch(getArticlesSuccess(response.articles))
+      const response = await ArticleService.getArticle()
+      dispatch(getArticlesSuccess(response.articles))
     } catch (error) {
-       console.log('error');
-      
+      console.log('error');
+
 
     }
   }
 
-  useEffect(()=>{
+  const deleteArticle = async (slug) =>{
+    try {
+      await ArticleService.deleteArticle(slug)
+      getArticles()
+    } catch (error) {
+      console.log(error);
+      
+      
+    }
+
+  }
+  useEffect(() => {
     getArticles()
-  },[])
+  }, [])
   return (
     <>
-      {isLoading && <Loader/> }
+      {isLoading && <Loader />}
       <div className='row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3'>
         {articles.map(item => (
           <div className='col' key={item.id}>
@@ -37,9 +49,14 @@ const Header = () => {
                 <p className="card-text font-semibold">{item.title}</p>
                 <div className="d-flex justify-content-between align-items-center">
                   <div className="">
-                    <button type="button" onClick={()=> navigate(`/article/${item.slug}`)} className="btn btn-sm btn-outline-secondary">View</button>
-                    <button type="button" className="btn btn-sm btn-outline-secondary">Edit</button>
-                    <button type="button" className="btn btn-sm btn-outline-secondary ">Delete</button>
+                    <button type="button" onClick={() => navigate(`/article/${item.slug}`)} className="btn btn-sm btn-outline-secondary">View</button>
+                    {loggedIn && user.username == item.author.username && (
+                      <>
+                        <button type="button" className="btn btn-sm btn-outline-secondary">Edit</button>
+                        <button onClick={() => deleteArticle(item.slug)} type="button" className="btn btn-sm btn-outline-secondary ">Delete</button>
+                      </>
+                    )}
+
                   </div>
                   <small className="text-body-secondary font-bold text-3xl">{item.author.username}</small>
                 </div>

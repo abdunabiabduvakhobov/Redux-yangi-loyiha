@@ -46,7 +46,7 @@ const Login = () => {
     <div className='text-center mt-5'>
       <main className="form-signin w-[20%] m-auto">
         <form>
-          <img className="mb-2 ml-18 " src={icon} alt="" width="170" height="67" />
+          <img className="mb-2 ml-13 " src={icon} alt="" width="170" height="67" />
           <h1 className="h3 mb-3 fw-normal">Please login</h1>
           <ValidationError/>
           <Input label={'Email address'} state={email} setState={setEmail} />
