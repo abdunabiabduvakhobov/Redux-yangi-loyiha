@@ -1,14 +1,11 @@
 import { useEffect,  } from 'react'
 import viteLogo from '/vite.svg'
-
 import { Routes, Route } from 'react-router'
 import { ArticleDetail, CreateArticle, Header, Login, Navbar, Register } from './Components'
 import AuthService from './service/auth'
 import { useDispatch } from 'react-redux'
 import { signUserSuccess } from './slice/auth'
 import { getItem } from './helpers/persistance-storage'
-import ArticleService from './service/article'
-import { getArticlesStart, getArticlesSuccess } from './slice/article'
 
 
 function App() {
@@ -24,23 +21,13 @@ function App() {
     }
   }
 
-  const getArticles = async () => {
-    dispatch(getArticlesStart())
-    try {
-     const response = await ArticleService.getArticle()
-     dispatch(getArticlesSuccess(response.articles))
-    } catch (error) {
-       console.log('error');
-      
 
-    }
-  }
   useEffect(() => {
     const token = getItem('token')
     if (token) {
       getUser()
     }
-    getArticles()
+   
   }, [])
   return (
     <>
