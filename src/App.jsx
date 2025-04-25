@@ -2,7 +2,7 @@ import { useEffect,  } from 'react'
 import viteLogo from '/vite.svg'
 
 import { Routes, Route } from 'react-router'
-import { ArticleDetail, Header, Login, Navbar, Register } from './Components'
+import { ArticleDetail, CreateArticle, Header, Login, Navbar, Register } from './Components'
 import AuthService from './service/auth'
 import { useDispatch } from 'react-redux'
 import { signUserSuccess } from './slice/auth'
@@ -51,6 +51,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/article/:slug' element={<ArticleDetail/>}/>
+        <Route path='/create-article' element={<CreateArticle/>}/>
       </Routes>
       </div>
     </>
