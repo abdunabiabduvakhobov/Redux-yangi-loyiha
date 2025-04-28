@@ -1,3 +1,4 @@
+import { EditArticle } from "../Components"
 import axios from "./api"
 
 const ArticleService = {
@@ -15,6 +16,10 @@ const ArticleService = {
   },
   async deleteArticle(slug) {
     const {data} = await axios.delete(`/articles/${slug}`)
+    return data
+  },
+  async editArticle(slug,article) {
+    const {data} = await axios.put(`/articles/${slug}`,{article})
     return data
   }
 }
