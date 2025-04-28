@@ -1,7 +1,7 @@
 import { useEffect,  } from 'react'
 import viteLogo from '/vite.svg'
 import { Routes, Route } from 'react-router'
-import { ArticleDetail, CreateArticle, Header, Login, Navbar, Register } from './Components'
+import { ArticleDetail, CreateArticle, EditArticle, Header, Login, Navbar, Register } from './Components'
 import AuthService from './service/auth'
 import { useDispatch } from 'react-redux'
 import { signUserSuccess } from './slice/auth'
@@ -39,6 +39,7 @@ function App() {
         <Route path='/register' element={<Register />} />
         <Route path='/article/:slug' element={<ArticleDetail/>}/>
         <Route path='/create-article' element={<CreateArticle/>}/>
+        <Route path='/edit-article/:slug' element={<EditArticle/>}/>
       </Routes>
       </div>
     </>

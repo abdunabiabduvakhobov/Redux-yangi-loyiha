@@ -25,7 +25,7 @@ const Header = () => {
 
   const deleteArticle = async (slug) =>{
     try {
-      await ArticleService.deleteArticle(slug)
+   await ArticleService.deleteArticle(slug)
       getArticles()
     } catch (error) {
       console.log(error);
@@ -52,7 +52,7 @@ const Header = () => {
                     <button type="button" onClick={() => navigate(`/article/${item.slug}`)} className="btn btn-sm btn-outline-secondary">View</button>
                     {loggedIn && user.username == item.author.username && (
                       <>
-                        <button type="button" className="btn btn-sm btn-outline-secondary">Edit</button>
+                        <button onClick={()=>navigate(`/edit-article/${item.slug}`)} type="button" className="btn btn-sm btn-outline-secondary">Edit</button>
                         <button onClick={() => deleteArticle(item.slug)} type="button" className="btn btn-sm btn-outline-secondary ">Delete</button>
                       </>
                     )}
